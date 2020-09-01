@@ -60,3 +60,7 @@ button:hover{
     border-color: black;
     font-weight: bold;
 }
+
+.clickable:hover{
+    cursor: pointer;
+}

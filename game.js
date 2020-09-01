@@ -1,5 +1,5 @@
-const clientID = '?';
-const secret = '?';
+const clientID = '';
+const secret = '';
 
 // Token for CC auth flow, not for accessing user info
 async function getToken(){      
@@ -23,7 +23,9 @@ var top200 = '';
 
 async function getGlobalCharts(){
 
-    const response = await fetch('./data.csv');     //Daily global top 200 from spotifycharts.com
+    const proxyurl = 'https://cors-anywhere.herokuapp.com/';                   //CORS Proxy
+    const url = 'https://spotifycharts.com/regional/us/daily/latest/download'; //Daily US top 200 from spotifycharts.com
+    const response = await fetch(proxyurl+url);    
     const data = await response.text();
     top200 = data.split('\n').slice(2).slice(0,200);
 }
@@ -92,7 +94,7 @@ function loadHTML(tracka, trackb){
         // so just use data from API (.info) for consistency
         const html = 
         `
-        <img src="${track.info.album.images[1].url}" id=${ab} class="album_art" alt="${track.info.album.name} album cover">
+        <img src="${track.info.album.images[1].url}" id=${ab} class="album_art clickable" alt="${track.info.album.name} album cover">
         <br>
         <p id="track-info">
             <b>${track.info.name}</b>
@@ -114,6 +116,7 @@ function loadHTML(tracka, trackb){
 
             alert('Correct!');
             document.getElementById('nextButton').style.display = 'block';
+
         }
         else{
 
@@ -121,12 +124,14 @@ function loadHTML(tracka, trackb){
             document.getElementById('nextButton').style.display = 'block';
             //for when score is implemented    document.getElementById('button-box').insertAdjacentHTML('afterbegin', startOverHTML);
 
-
         }
         document.getElementById('tracka').removeEventListener("click",checkA);
         document.getElementById('trackb').removeEventListener("click",checkB);
-        afield.insertAdjacentHTML('beforeend',statField(tracka));
-        bfield.insertAdjacentHTML('beforeend',statField(trackb));
+        afield.insertAdjacentHTML('beforeend',getStatField(tracka));
+        bfield.insertAdjacentHTML('beforeend',getStatField(trackb));
+        document.getElementById('tracka').classList.remove('clickable');
+        document.getElementById('trackb').classList.remove('clickable');
+
     }
 
     function checkB(){
@@ -147,13 +152,14 @@ function loadHTML(tracka, trackb){
         }
         document.getElementById('tracka').removeEventListener("click",checkA);
         document.getElementById('trackb').removeEventListener("click",checkB);
-        afield.insertAdjacentHTML('afterend',statField(tracka));
-        bfield.insertAdjacentHTML('afterend',statField(trackb));       
+        afield.insertAdjacentHTML('beforeend',getStatField(tracka));
+        bfield.insertAdjacentHTML('beforeend',getStatField(trackb));  
+        document.getElementById('tracka').classList.remove('clickable');
+        document.getElementById('trackb').classList.remove('clickable');
+
     }
 
-
-
-    function statField(track){
+    function getStatField(track){
         
         const html = 
         `
