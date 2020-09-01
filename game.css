@@ -1,0 +1,62 @@
+body{
+    background-color: #dee5ff;
+    height: 100%;
+    display: block
+}
+h1{
+    font-family: "Noticia Text",serif;
+    font-size: 2.5em;
+    color: #151517;
+    margin: 0 0 0.1em 0;
+}
+
+p{
+    text-align: justify;
+    font-family: "Noticia Text",sans-serif;
+}
+
+#content-pane{
+    width:60%;
+    margin:1em auto;
+}
+
+#game-box{
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-content: center;
+    flex: wrap;
+    justify-content: center;
+}
+.track-box{
+    display:block;
+    margin:1em auto;
+    max-width: 300px;
+    padding: 2%;
+    position: relative;
+}
+
+img{
+    border-radius:0.5%;
+}
+
+button{
+    margin:1em auto;
+    text-align: center;
+    background-color: #dee5ff;
+    width: 80px;
+    height: 25px;
+    font-family: "Noticia Text";
+    border: 1.25px solid gray;
+    border-radius: 10px;
+    background-color: #dee5ff;
+}
+button:hover{
+    background-color: #aab8eb;
+}
+
+.show{
+    border-color: black;
+    font-weight: bold;
+}
